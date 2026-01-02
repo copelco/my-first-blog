@@ -1,1 +1,6 @@
 Django~=5.1.2
+
+django-simple-deploy==1.4.0
+dsd-pythonanywhere @ git+https://github.com/caktus/dsd-pythonanywhere@main
+python-dotenv
+dj-database-url

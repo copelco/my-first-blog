@@ -1,16 +1,21 @@
-"""
-WSGI config for mysite project.
-
-It exposes the WSGI callable as a module-level variable named ``application``.
-
-For more information on this file, see
-https://docs.djangoproject.com/en/5.1/howto/deployment/wsgi/
-"""
-
 import os
+from pathlib import Path
 
-from django.core.wsgi import get_wsgi_application
+from dotenv import load_dotenv
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'mysite.settings')
+# Set the project directory explicitly for PythonAnywhere
+# The WSGI file lives in /var/www/, not in the project directory
+project_dir = Path.home() / "my-first-blog"
+
+# Ensure the project directory is in the PYTHONPATH
+if str(project_dir) not in os.sys.path:
+    os.sys.path.insert(0, str(project_dir))
+
+# Load deployed environment variables from the project's .env file
+load_dotenv(project_dir / ".env")
+
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mysite.settings")
+
+from django.core.wsgi import get_wsgi_application  # noqa E402
 
 application = get_wsgi_application()
